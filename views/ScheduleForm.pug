@@ -1,0 +1,63 @@
+mixin ScheduleForm()
+    #registerSchedule.modal.fade(tabindex='-1', role='dialog', aria-labelledby='registerScheduleLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#registerScheduleLabel.modal-title 일정 만들기
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    form
+                        .form-group
+                            label.col-form-label 일정 제목
+                            input#recipient-name.form-control(type='text')
+                        .form-group
+                            label.col-form-label(for='message-text') 일정 설명
+                            textarea#message-text.form-control
+                        .form-row
+                            .col-md-6
+                                .form-group
+                                    label.col-form-label 일정 시작 날짜
+                                    #datetimepicker1.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker1')
+                                        .input-group-append(data-target='#datetimepicker1', data-toggle='datetimepicker')
+                                            .input-group-text
+                                                i.material-icons
+                                                    | calendar_today
+                            .col-md-6
+                                .form-group
+                                    label.col-form-label 일정 시작 시간
+                                    #datetimepicker2.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker2')
+                                        .input-group-append(data-target='#datetimepicker2', data-toggle='datetimepicker')
+                                            .input-group-text
+                                                i.material-icons
+                                                    | access_time
+                        .form-row
+                            .col-md-6
+                                .form-group
+                                    label.col-form-label 일정 종료 날짜
+                                    #datetimepicker3.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker3')
+                                        .input-group-append(data-target='#datetimepicker3', data-toggle='datetimepicker')
+                                            .input-group-text
+                                                i.material-icons
+                                                    | calendar_today
+                            .col-md-6
+                                .form-group
+                                    label.col-form-label 일정 종료 시간
+                                    #datetimepicker4.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker4')
+                                        .input-group-append(data-target='#datetimepicker4', data-toggle='datetimepicker')
+                                            .input-group-text
+                                                i.material-icons
+                                                    | access_time
+                            .form-check.form-check-inline
+                                input#inlineCheckbox1.form-check-input(type='checkbox', value='option1')
+                                label.form-check-label(for='inlineCheckbox1') 매월 반복
+                            .form-check.form-check-inline
+                                input#inlineCheckbox2.form-check-input(type='checkbox', value='option2')
+                                label.form-check-label(for='inlineCheckbox2') 하루 종일
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') 취소
+                    button.btn.btn-primary(type='button') 일정 만들기
