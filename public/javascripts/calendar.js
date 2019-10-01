@@ -21,19 +21,19 @@ $(".event-consecutive, .event, .event-repeated").click(function(event) {
 });
 
 $(function() {
-  $("#datetimepicker1").datetimepicker({
-    format: "L"
+  $("#datepicker-start").datetimepicker({
+    format: "YYYY-MM-DD"
   });
-  $("#datetimepicker3").datetimepicker({
-    format: "L"
+  $("#datepicker-end").datetimepicker({
+    format: "YYYY-MM-DD"
   });
 });
 
 $(function() {
-  $("#datetimepicker2").datetimepicker({
+  $("#timepicker-start").datetimepicker({
     format: "LT"
   });
-  $("#datetimepicker4").datetimepicker({
+  $("#timepicker-end").datetimepicker({
     format: "LT"
   });
 });

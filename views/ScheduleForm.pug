@@ -18,18 +18,18 @@ mixin ScheduleForm()
                             .col-md-6
                                 .form-group
                                     label.col-form-label 일정 시작 날짜
-                                    #datetimepicker1.input-group.date(data-target-input='nearest')
-                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker1')
-                                        .input-group-append(data-target='#datetimepicker1', data-toggle='datetimepicker')
+                                    #datepicker-start.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datepicker-start')
+                                        .input-group-append(data-target='#datepicker-start', data-toggle='datetimepicker')
                                             .input-group-text
                                                 i.material-icons
                                                     | calendar_today
                             .col-md-6
                                 .form-group
                                     label.col-form-label 일정 시작 시간
-                                    #datetimepicker2.input-group.date(data-target-input='nearest')
-                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker2')
-                                        .input-group-append(data-target='#datetimepicker2', data-toggle='datetimepicker')
+                                    #timepicker-start.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#timepicker-start')
+                                        .input-group-append(data-target='#timepicker-start', data-toggle='datetimepicker')
                                             .input-group-text
                                                 i.material-icons
                                                     | access_time
@@ -37,18 +37,18 @@ mixin ScheduleForm()
                             .col-md-6
                                 .form-group
                                     label.col-form-label 일정 종료 날짜
-                                    #datetimepicker3.input-group.date(data-target-input='nearest')
-                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker3')
-                                        .input-group-append(data-target='#datetimepicker3', data-toggle='datetimepicker')
+                                    #datepicker-end.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#datepicker-end')
+                                        .input-group-append(data-target='#datepicker-end', data-toggle='datetimepicker')
                                             .input-group-text
                                                 i.material-icons
                                                     | calendar_today
                             .col-md-6
                                 .form-group
                                     label.col-form-label 일정 종료 시간
-                                    #datetimepicker4.input-group.date(data-target-input='nearest')
-                                        input.form-control.datetimepicker-input(type='text', data-target='#datetimepicker4')
-                                        .input-group-append(data-target='#datetimepicker4', data-toggle='datetimepicker')
+                                    #timepicker-end.input-group.date(data-target-input='nearest')
+                                        input.form-control.datetimepicker-input(type='text', data-target='#timepicker-end')
+                                        .input-group-append(data-target='#timepicker-end', data-toggle='datetimepicker')
                                             .input-group-text
                                                 i.material-icons
                                                     | access_time
