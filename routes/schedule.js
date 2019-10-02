@@ -5,11 +5,22 @@ const models = require("../models");
 router.get("/:year/:month", function(req, res, next) {
   let year = req.params.year;
   let month = req.params.month;
+  let startDate = new Date(year, month - 1, -7);
+  let lastDate = new Date(year, month, +7);
   models.Schedule.findAll({
     where: {
-      startAt: {
-        between: [new Date(year, month - 2), new Date(year, month - 1)]
-      }
+      $or: [
+        {
+          startAt: {
+            between: [startDate, lastDate]
+          }
+        },
+        {
+          endAt: {
+            between: [startDate, lastDate]
+          }
+        }
+      ]
     }
   })
     .then(result => {
@@ -21,7 +32,7 @@ router.get("/:year/:month", function(req, res, next) {
     });
 });
 
-router.post("/", function(req, res, next) {
+router.post("/write", function(req, res, next) {
   models.post
     .create({
       title: req.body.title,
