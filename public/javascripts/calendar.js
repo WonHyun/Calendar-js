@@ -70,6 +70,8 @@ const moveBeforeMonth = () => {
 
 const calendarInit = () => {
   let current = new Date();
+  createCalendarFrame();
+  setCurrentMonth(current);
   $("#view li:first-child a").tab("show");
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]')
@@ -94,8 +96,9 @@ const calendarInit = () => {
   });
   $("#next-month").on("click", moveNextMonth);
   $("#before-month").on("click", moveBeforeMonth);
-  createCalendarFrame();
-  setCurrentMonth(current);
+  $(".day, .daily-calendar").click(function() {
+    $("#registerSchedule").modal("show");
+  });
 };
 
 $(function() {

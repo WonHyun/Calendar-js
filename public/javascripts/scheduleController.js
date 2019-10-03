@@ -24,9 +24,6 @@ const getSchedule = () => {
 };
 
 $(function() {
-  $(".week, .daily-calendar").click(function() {
-    $("#registerSchedule").modal("show");
-  });
   $(".event-consecutive, .event, .event-repeated").click(function(event) {
     event.stopPropagation();
   });
