@@ -23,6 +23,55 @@ const getSchedule = () => {
     .then(e => console.log(e));
 };
 
+const scheduleWrite = () => {
+  let title = $("#recipient-name").val();
+  let startAtDate = new Date($("#datepicker-start").datetimepicker("date"));
+  let endAtDate = new Date($("#datepicker-end").datetimepicker("date"));
+  let startAtTime = new Date($("#timepicker-start").datetimepicker("date"));
+  let endAtTime = new Date($("#timepicker-end").datetimepicker("date"));
+  if (
+    title !== "" &&
+    startAtDate !== null &&
+    startAtTime !== null &&
+    endAtDate !== null &&
+    endAtTime !== null
+  ) {
+    let startAt = startAtTime;
+    startAt.setFullYear(startAtDate.getFullYear());
+    startAt.setMonth(startAtDate.getMonth());
+    startAt.setDate(startAtDate.getDate());
+
+    let endAt = endAtTime;
+    endAt.setFullYear(endAtDate.getFullYear());
+    endAt.setMonth(endAtDate.getMonth());
+    endAt.setDate(endAtDate.getDate());
+
+    const schedule = {
+      title: title,
+      discription: $("#message-text").val(),
+      startAt: startAt,
+      endAt: endAt,
+      repeated: $("#inlineCheckbox1").is(":checked")
+    };
+    console.log(schedule);
+    postScheduleWrite(schedule);
+    $("#registerSchedule").modal("hide");
+  } else {
+    alert("제목 또는 일정 기간을 입력해주세요.");
+  }
+};
+
+const clearScheduleForm = () => {
+  $("#recipient-name").val("");
+  $("#message-text").val("");
+  $("#datepicker-start").datetimepicker("clear");
+  $("#timepicker-start").datetimepicker("clear");
+  $("#datepicker-end").datetimepicker("clear");
+  $("#timepicker-end").datetimepicker("clear");
+  $("#inlineCheckbox1").prop("checked", false);
+  $("#inlineCheckbox2").prop("checked", false);
+};
+
 $(function() {
   $(".event-consecutive, .event, .event-repeated").click(function(event) {
     event.stopPropagation();
@@ -54,8 +103,12 @@ $(function() {
   });
   $(".day, .daily-calendar").click(function(e) {
     let currentDate = new Date(e.target.getAttribute("data-date"));
+    clearScheduleForm();
     $("#datepicker-start").datetimepicker("date", currentDate);
     $("#timepicker-start").datetimepicker("date", currentDate);
     $("#registerSchedule").modal("show");
+  });
+  $(".modal-footer > .btn-primary").click(function(e) {
+    scheduleWrite();
   });
 });
