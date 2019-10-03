@@ -11,6 +11,9 @@ const setCurrentMonth = targetDate => {
       day.getElementsByClassName(
         "day-label"
       )[0].innerHTML = startDate.getDate();
+      day
+        .getElementsByClassName("day-label")[0]
+        .setAttribute("data-date", startDate);
       startDate.setDate(startDate.getDate() + 1);
     }
   }
@@ -96,9 +99,6 @@ const calendarInit = () => {
   });
   $("#next-month").on("click", moveNextMonth);
   $("#before-month").on("click", moveBeforeMonth);
-  $(".day, .daily-calendar").click(function() {
-    $("#registerSchedule").modal("show");
-  });
 };
 
 $(function() {

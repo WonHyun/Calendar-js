@@ -37,7 +37,6 @@ $(function() {
   });
   $("#datepicker-end").datetimepicker({
     autoClose: true,
-    useCurrent: true,
     format: "YYYY-MM-DD"
   });
   $("#timepicker-start").datetimepicker({
@@ -45,7 +44,18 @@ $(function() {
     format: "LT"
   });
   $("#timepicker-end").datetimepicker({
-    useCurrent: true,
     format: "LT"
+  });
+  $("#datepicker-start").on("change.datetimepicker", function(e) {
+    $("#datepicker-end").datetimepicker("minDate", e.date);
+  });
+  $("#datepicker-end").on("change.datetimepicker", function(e) {
+    $("#datepicker-start").datetimepicker("maxDate", e.date);
+  });
+  $(".day, .daily-calendar").click(function(e) {
+    let currentDate = new Date(e.target.getAttribute("data-date"));
+    $("#datepicker-start").datetimepicker("date", currentDate);
+    $("#timepicker-start").datetimepicker("date", currentDate);
+    $("#registerSchedule").modal("show");
   });
 });
