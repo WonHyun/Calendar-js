@@ -5,7 +5,13 @@ include CalendarView
 block content
   .calendar-container
     .calendar-header
-      button.btn.btn-light Today
+      .form-row
+        #datepicker-today.input-group.date(data-target-input='nearest')
+          input.form-control.datetimepicker-input(type='hidden', value='#datepicker-today')
+          .input-group-append(data-target='#datepicker-today', data-toggle='datetimepicker')
+            .input-group-text
+              i.material-icons
+                | calendar_today
       .ico-arrow
         a(href='#', data-toggle='tooltip', data-placement='top', title='이전')
           i.material-icons
