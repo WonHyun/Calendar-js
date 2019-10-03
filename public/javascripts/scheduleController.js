@@ -61,13 +61,35 @@ const scheduleWrite = () => {
   }
 };
 
+const toggleAlldayDisable = () => {
+  $("#datepicker-start").datetimepicker("enable");
+  $("#timepicker-start").datetimepicker("enable");
+  $("#datepicker-end").datetimepicker("enable");
+  $("#timepicker-end").datetimepicker("enable");
+};
+
+const toggleAlldayEnable = () => {
+  let currentDate = new Date($("#datepicker-start").datetimepicker("date"));
+  $("#timepicker-start").datetimepicker("date", currentDate);
+  $("#datepicker-end").datetimepicker("date", currentDate);
+
+  currentDate.setDate(currentDate.getDate() + 1);
+  currentDate.setMilliseconds(currentDate.getMilliseconds() - 1);
+  $("#timepicker-end").datetimepicker("date", currentDate);
+
+  $("#datepicker-start").datetimepicker("disable");
+  $("#timepicker-start").datetimepicker("disable");
+  $("#datepicker-end").datetimepicker("disable");
+  $("#timepicker-end").datetimepicker("disable");
+};
+
 const clearScheduleForm = () => {
   $("#recipient-name").val("");
   $("#message-text").val("");
-  $("#datepicker-start").datetimepicker("clear");
-  $("#timepicker-start").datetimepicker("clear");
-  $("#datepicker-end").datetimepicker("clear");
-  $("#timepicker-end").datetimepicker("clear");
+  $("#datepicker-start").datetimepicker("date", null);
+  $("#timepicker-start").datetimepicker("date", null);
+  $("#datepicker-end").datetimepicker("date", null);
+  $("#timepicker-end").datetimepicker("date", null);
   $("#inlineCheckbox1").prop("checked", false);
   $("#inlineCheckbox2").prop("checked", false);
 };
@@ -103,6 +125,7 @@ $(function() {
   });
   $(".day, .daily-calendar").click(function(e) {
     let currentDate = new Date(e.target.getAttribute("data-date"));
+    toggleAlldayDisable();
     clearScheduleForm();
     $("#datepicker-start").datetimepicker("date", currentDate);
     $("#timepicker-start").datetimepicker("date", currentDate);
@@ -110,5 +133,12 @@ $(function() {
   });
   $(".modal-footer > .btn-primary").click(function(e) {
     scheduleWrite();
+  });
+  $("#inlineCheckbox2").click(function(e) {
+    if (e.target.checked) {
+      toggleAlldayEnable();
+    } else {
+      toggleAlldayDisable();
+    }
   });
 });
