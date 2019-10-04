@@ -1,3 +1,14 @@
+var globalCurrentDate = {
+  get date() {
+    return this._date;
+  },
+  set date(date) {
+    this._date = date;
+    setCurrentMonth(date);
+    getSchedule(date.getFullYear(), date.getMonth() + 1);
+  }
+};
+
 const setCurrentMonth = targetDate => {
   let dateText =
     targetDate.getFullYear() + "년 " + (targetDate.getMonth() + 1) + "월";
@@ -11,9 +22,7 @@ const setCurrentMonth = targetDate => {
       day.getElementsByClassName(
         "day-label"
       )[0].innerHTML = startDate.getDate();
-      day
-        .getElementsByClassName("day-label")[0]
-        .setAttribute("data-date", startDate);
+      day.setAttribute("data-date", startDate);
       startDate.setDate(startDate.getDate() + 1);
     }
   }
@@ -35,51 +44,22 @@ const createCalendarFrame = () => {
 };
 
 const moveNextMonth = () => {
-  let current = $("#datepicker-today").datetimepicker("date");
-  if (current !== null) {
-    let nextDate = new Date(
-      current._d.getFullYear(),
-      current._d.getMonth() + 1
-    );
-    $("#datepicker-today").datetimepicker("date", nextDate);
-  } else {
-    let currentDate = new Date();
-    let nextDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1
-    );
-    $("#datepicker-today").datetimepicker("date", nextDate);
-    setCurrentMonth(nextDate);
-  }
+  let current = globalCurrentDate.date;
+  current.setMonth(current.getMonth() + 1);
+  globalCurrentDate.date = current;
 };
 const moveBeforeMonth = () => {
-  let current = $("#datepicker-today").datetimepicker("date");
-  if (current !== null) {
-    let beforeDate = new Date(
-      current._d.getFullYear(),
-      current._d.getMonth() - 1
-    );
-    $("#datepicker-today").datetimepicker("date", beforeDate);
-  } else {
-    let currentDate = new Date();
-    let beforeDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - 1
-    );
-    $("#datepicker-today").datetimepicker("date", beforeDate);
-    setCurrentMonth(beforeDate);
-  }
+  let current = globalCurrentDate.date;
+  current.setMonth(current.getMonth() - 1);
+  globalCurrentDate.date = current;
 };
 
 const calendarInit = () => {
   let current = new Date();
   createCalendarFrame();
-  setCurrentMonth(current);
+  globalCurrentDate.date = current;
   $("#view li:first-child a").tab("show");
   $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="popover"]')
-    .popover()
-    .on("inserted.bs.popover");
   $("#datepicker-today").datetimepicker({
     autoClose: true,
     useCurrent: true,
@@ -93,7 +73,7 @@ const calendarInit = () => {
         currentDate.getFullYear() !== oldDate.getFullYear() ||
         currentDate.getMonth() !== oldDate.getMonth()
       ) {
-        setCurrentMonth(e.date._d);
+        globalCurrentDate.date = e.date._d;
       }
     }
   });

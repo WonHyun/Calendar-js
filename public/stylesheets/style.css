@@ -150,10 +150,61 @@ a:hover {
       cursor: pointer; }
     .week .day:nth-child(1) > .event {
       grid-column-start: 1; }
+    .week .day:nth-child(2) > .event {
+      grid-column-start: 2; }
+    .week .day:nth-child(3) > .event {
+      grid-column-start: 3; }
+    .week .day:nth-child(4) > .event {
+      grid-column-start: 4; }
+    .week .day:nth-child(5) > .event {
+      grid-column-start: 5; }
+    .week .day:nth-child(6) > .event {
+      grid-column-start: 6; }
+    .week .day:nth-child(7) > .event {
+      grid-column-start: 7; }
+    .week .day:nth-child(8) > .event {
+      grid-column-start: 8; }
+    .week .day:nth-child(9) > .event {
+      grid-column-start: 9; }
+
     .week .day:nth-child(1) > .event-consecutive {
       grid-column-start: 1; }
+    .week .day:nth-child(2) > .event-consecutive {
+      grid-column-start: 2; }
+    .week .day:nth-child(3) > .event-consecutive {
+      grid-column-start: 3; }
+    .week .day:nth-child(4) > .event-consecutive {
+      grid-column-start: 4; }
+    .week .day:nth-child(5) > .event-consecutive {
+      grid-column-start: 5; }
+    .week .day:nth-child(6) > .event-consecutive {
+      grid-column-start: 6; }
+    .week .day:nth-child(7) > .event-consecutive {
+      grid-column-start: 7; }
+    .week .day:nth-child(8) > .event-consecutive {
+      grid-column-start: 8; }
+    .week .day:nth-child(9) > .event-consecutive {
+      grid-column-start: 9; }
+
     .week .day:nth-child(1) > .event-repeated {
       grid-column-start: 1; }
+    .week .day:nth-child(2) > .event-repeated {
+      grid-column-start: 2; }
+    .week .day:nth-child(3) > .event-repeated {
+      grid-column-start: 3; }
+    .week .day:nth-child(4) > .event-repeated {
+      grid-column-start: 4; }
+    .week .day:nth-child(5) > .event-repeated {
+      grid-column-start: 5; }
+    .week .day:nth-child(6) > .event-repeated {
+      grid-column-start: 6; }
+    .week .day:nth-child(7) > .event-repeated {
+      grid-column-start: 7; }
+    .week .day:nth-child(8) > .event-repeated {
+      grid-column-start: 8; }
+    .week .day:nth-child(9) > .event-repeated {
+      grid-column-start: 9; }
+
     .week .day [data-span="1"] {
       grid-column-end: span 1; }
     .week .day [data-span="2"] {
