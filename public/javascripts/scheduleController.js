@@ -14,7 +14,14 @@ const postScheduleWrite = schedule => {
     })
   })
     .then(e => e.json())
-    .then(e => console.log(e));
+    .then(e => {
+      if (e.success) {
+        globalCurrentDate.date = schedule.startAt;
+      } else {
+        console.log(e);
+        console.log("fail get schedules from db");
+      }
+    });
 };
 
 const getSchedule = (year, month) => {
@@ -24,6 +31,7 @@ const getSchedule = (year, month) => {
       if (e.success) {
         showSchedule(e.schedules);
       } else {
+        console.log(e);
         console.log("fail get schedules from db");
       }
     });
@@ -61,7 +69,6 @@ const scheduleWrite = () => {
     };
     console.log(schedule);
     postScheduleWrite(schedule);
-    globalCurrentDate.date = schedule.startAt;
     $("#registerSchedule").modal("hide");
   } else {
     alert("제목 또는 일정 기간을 입력해주세요.");
