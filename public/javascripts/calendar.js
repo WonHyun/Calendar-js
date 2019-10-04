@@ -54,12 +54,12 @@ const createCalendarFrame = () => {
 const moveNextMonth = () => {
   let current = globalCurrentDate.date;
   current.setMonth(current.getMonth() + 1);
-  globalCurrentDate.date = current;
+  $("#datepicker-today").datetimepicker("date", current);
 };
 const moveBeforeMonth = () => {
   let current = globalCurrentDate.date;
   current.setMonth(current.getMonth() - 1);
-  globalCurrentDate.date = current;
+  $("#datepicker-today").datetimepicker("date", current);
 };
 
 const calendarInit = () => {
