@@ -13,7 +13,7 @@ var app = express();
 const models = require("./models/index.js");
 
 models.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log("DB connected");
   })
