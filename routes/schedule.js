@@ -4,6 +4,20 @@ const models = require("../models");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+router.get("/delete/:id", function(req, res, next) {
+  let id = parseInt(req.params.id);
+  models.Schedule.destroy({
+    where: { scheduleId: id }
+  })
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({ error: "db error: " + err, success: false });
+    });
+});
+
 router.get("/:year/:month", function(req, res, next) {
   let year = req.params.year;
   let month = req.params.month;
@@ -21,7 +35,7 @@ router.get("/:year/:month", function(req, res, next) {
     .then(result => {
       res.json({ schedules: result, success: true });
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log(err);
       res.json({ error: "db error: " + err, success: false });
     });

@@ -37,6 +37,21 @@ const getSchedule = (year, month) => {
     });
 };
 
+const deleteSchedule = scheduleId => {
+  fetch("/schedule/delete/" + scheduleId)
+    .then(e => e.json())
+    .then(e => {
+      if (e.success) {
+        let date = globalCurrentDate.date;
+        $('[data-toggle="popover"]').popover("hide");
+        getSchedule(date.getFullYear(), date.getMonth() + 1);
+      } else {
+        console.log(e);
+        console.log("fail get schedules from db");
+      }
+    });
+};
+
 const scheduleWrite = () => {
   let title = $("#recipient-name").val();
   let startAtDate = new Date($("#datepicker-start").datetimepicker("date"));
@@ -114,8 +129,9 @@ const scheduleViewTemplete = (schedule, eventType, diff, isDaily) => {
     eventType +
     ` event-start event-end" data-span="` +
     diff +
-    `" data-toggle="popover" data-html="true" `;
-  if (isDaily) html += `data-placement='left'`;
+    `" data-toggle="popover" data-html="true"`;
+  html += ` data-id=` + schedule.scheduleId + " ";
+  if (isDaily) html += ` data-placement='left' `;
   html +=
     `data-content='
     <div class="content-line">
@@ -123,9 +139,15 @@ const scheduleViewTemplete = (schedule, eventType, diff, isDaily) => {
     eventType +
     `-marking"></div>
       <div class="title">
+        <div class="pop-header">
         <h5>` +
     schedule.title +
-    `</h5>
+    `</h5><button class="btn btn-danger scheduleDeleteButton"` +
+    ` name="` +
+    schedule.scheduleId +
+    `" ` +
+    `>삭제</button>` +
+    `</div>
         <h7 class="reservation">` +
     dateString +
     `</h7>
@@ -220,7 +242,11 @@ const showSchedule = schedules => {
   });
   $('[data-toggle="popover"]')
     .popover()
-    .on("inserted.bs.popover");
+    .on("inserted.bs.popover", () => {
+      $(".scheduleDeleteButton").click(function(event) {
+        deleteSchedule(event.target.name);
+      });
+    });
 };
 
 const toggleAlldayDisable = () => {

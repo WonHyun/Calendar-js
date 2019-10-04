@@ -278,4 +278,13 @@ a:hover {
 .modal .form-row .form-check-inline {
   align-items: baseline; }
 
+.popover .popover-body .content-line .title .pop-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+
+.scheduleDeleteButton {
+  font-size: 14px;
+}
 /*# sourceMappingURL=style.css.map */
