@@ -41,7 +41,7 @@ const setCurrentMonth = targetDate => {
 const createCalendarFrame = () => {
   const dayHtml = "<div class='day'><h3 class='day-label'></h3></div>";
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     let weekDiv = document.createElement("div");
     weekDiv.className = "week";
     for (let j = 0; j < 7; j++) {

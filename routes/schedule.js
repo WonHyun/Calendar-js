@@ -22,13 +22,13 @@ router.get("/:year/:month", function(req, res, next) {
   let year = req.params.year;
   let month = req.params.month;
   let startDate = new Date(year, month - 1, -7);
-  let lastDate = new Date(year, month, +7);
+  let lastDate = new Date(year, month, +14);
 
   models.Schedule.findAll({
     where: {
-      [Op.or]: [
-        { startAt: { [Op.between]: [startDate, lastDate] } },
-        { endAt: { [Op.between]: [startDate, lastDate] } }
+      [Op.and]: [
+        { endAt: { [Op.gte]: startDate } },
+        { startAt: { [Op.lte]: lastDate } }
       ]
     }
   })
