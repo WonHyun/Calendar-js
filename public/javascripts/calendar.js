@@ -4,9 +4,17 @@ var globalCurrentDate = {
   },
   set date(date) {
     this._date = date;
+    setCurrentDay(date);
     setCurrentMonth(date);
     getSchedule(date.getFullYear(), date.getMonth() + 1);
   }
+};
+
+const setCurrentDay = targetDate => {
+  const dayName = ["일", "월", "화", "수", "목", "금", "토"];
+  let dateText =
+    targetDate.getDate() + "일 " + dayName[targetDate.getDay()] + "요일";
+  $(".daily-calendar > span").text(dateText);
 };
 
 const setCurrentMonth = targetDate => {
@@ -66,16 +74,7 @@ const calendarInit = () => {
     format: "YYYY-MM-DD"
   });
   $("#datepicker-today").on("change.datetimepicker", function(e) {
-    if (e.oldDate !== null) {
-      let currentDate = e.date._d;
-      let oldDate = e.oldDate._d;
-      if (
-        currentDate.getFullYear() !== oldDate.getFullYear() ||
-        currentDate.getMonth() !== oldDate.getMonth()
-      ) {
-        globalCurrentDate.date = e.date._d;
-      }
-    }
+    globalCurrentDate.date = e.date._d;
   });
   $("#next-month").on("click", moveNextMonth);
   $("#before-month").on("click", moveBeforeMonth);

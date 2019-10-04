@@ -12,24 +12,4 @@ mixin MonthView()
 mixin DayView()
     #day.tab-pane(role='tabpanel', aria-labelledby='tab-day')
         .daily-calendar
-            span.day-name 3일 화요일
-            .event-consecutive.event-start.event-end(data-toggle='popover', data-html='true', data-placement='left', data-content='<div class="content-line"><div class="event-consecutive-marking"></div><div class="title"><h5>일정 1</h5><h7 class="reservation">2019년 9월 15일 – 17일</div>\
-            </div><div class="content-line"><i class="material-icons">\
-            notes\
-            </i><div class="title"><h7 class="reservation">스케쥴 메모, 설명이 나타납니다.</div>')
-                | 연속 일정 1
-            .event-consecutive.event-start.event-end(data-toggle='popover', data-html='true', data-placement='left', data-content='<div class="content-line"><div class="event-consecutive-marking"></div><div class="title"><h5>일정 1</h5><h7 class="reservation">2019년 9월 15일 – 17일</div>\
-            </div><div class="content-line"><i class="material-icons">\
-            notes\
-            </i><div class="title"><h7 class="reservation">스케쥴 메모, 설명이 나타납니다.</div>')
-                | 연속 일정 2
-            .event.event-start.event-end(data-toggle='popover', data-html='true', data-placement='left', data-content='<div class="content-line"><div class="event-marking"></div><div class="title"><h5>일정 1</h5><h7 class="reservation">2019년 9월 15일 – 17일<span class="reservation-time">⋅오후 2:00~ 3:00</span></div>\
-            </div><div class="content-line"><i class="material-icons">\
-            notes\
-            </i><div class="title"><h7 class="reservation">스케쥴 메모, 설명이 나타납니다.</div>')
-                | 일반 일정 3
-            .event-repeated.event-start.event-end(data-toggle='popover', data-html='true', data-placement='left', data-content='<div class="content-line"><div class="event-repeated-marking"></div><div class="title"><h5>일정 1</h5><h7 class="reservation">2019년 9월 15일 – 17일<span class="reservation-time">⋅오후 2:00~ 3:00</span><span class="repeat-message">⋅매월 반복</span></div>\
-            </div><div class="content-line"><i class="material-icons">\
-            notes\
-            </i><div class="title"><h7 class="reservation">스케쥴 메모, 설명이 나타납니다.</div>')
-                | 반복 일정 1
+            span.day-name

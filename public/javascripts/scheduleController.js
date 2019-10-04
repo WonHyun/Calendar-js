@@ -75,7 +75,7 @@ const scheduleWrite = () => {
   }
 };
 
-const scheduleViewTemplete = (schedule, eventType, diff) => {
+const scheduleViewTemplete = (schedule, eventType, diff, isDaily) => {
   let start = new Date(schedule.startAt);
   let end = new Date(schedule.endAt);
   let timeString = "";
@@ -115,7 +115,10 @@ const scheduleViewTemplete = (schedule, eventType, diff) => {
     eventType +
     ` event-start event-end" data-span="` +
     diff +
-    `" data-toggle="popover" data-html="true" data-content='
+    `" data-toggle="popover" data-html="true" `;
+  if (isDaily) html += `data-placement='left'`;
+  html +=
+    `data-content='
     <div class="content-line">
       <div class="` +
     eventType +
@@ -157,17 +160,29 @@ const createScheduleView = schedule => {
   let eventType = diff > 1 ? "event-consecutive" : "event";
   eventType = schedule.repeated ? "event-repeated" : eventType;
 
+  // create monthly schedule
   let days = $(".day");
   for (let day of days) {
     if (!moment(new Date(day.getAttribute("data-date"))).diff(start, "day")) {
-      day.innerHTML += scheduleViewTemplete(schedule, eventType, diff);
+      day.innerHTML += scheduleViewTemplete(schedule, eventType, diff, false);
       break;
     }
+  }
+
+  //create daily schedule
+  let currentDate = globalCurrentDate.date;
+  if (
+    !moment(currentDate).diff(start, "day") ||
+    !moment(currentDate).diff(end, "day")
+  ) {
+    $(".daily-calendar").append(
+      scheduleViewTemplete(schedule, eventType, diff, true)
+    );
   }
 };
 
 const showSchedule = schedules => {
-  $(".day > .event-consecutive, .event, .event-repeated").remove();
+  $(".event-consecutive, .event, .event-repeated").remove();
   for (let schedule of schedules) {
     createScheduleView(schedule);
   }
@@ -213,7 +228,6 @@ const clearScheduleForm = () => {
 };
 
 $(function() {
-  const current = new Date();
   $("#datepicker-start").datetimepicker({
     autoClose: true,
     useCurrent: true,
