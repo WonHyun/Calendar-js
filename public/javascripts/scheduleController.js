@@ -67,7 +67,6 @@ const scheduleWrite = () => {
       endAt: endAt,
       repeated: $("#inlineCheckbox1").is(":checked")
     };
-    console.log(schedule);
     postScheduleWrite(schedule);
     $("#registerSchedule").modal("hide");
   } else {
@@ -153,6 +152,42 @@ const scheduleViewTemplete = (schedule, eventType, diff, isDaily) => {
   return html;
 };
 
+const appendMonthlySchedule = (schedule, eventType) => {
+  let start = new Date(schedule.startAt);
+  let end = new Date(schedule.endAt);
+  let days = $(".day");
+  if (
+    moment(new Date(days[0].getAttribute("data-date"))).diff(start, "day") > 0
+  ) {
+    start = new Date(days[0].getAttribute("data-date"));
+  }
+  let diff = moment(end).diff(start, "day") + 1;
+  for (let i = 0; i < days.length; i++) {
+    let currentDate = new Date(days[i].getAttribute("data-date"));
+    if (!moment(currentDate).diff(start, "day")) {
+      if (diff > 7) {
+        let delta = 7 - start.getDay();
+        days[i].innerHTML += scheduleViewTemplete(
+          schedule,
+          eventType,
+          delta,
+          false
+        );
+        start.setDate(start.getDate() + delta);
+        diff -= delta;
+        i += delta - 1;
+      } else {
+        days[i].innerHTML += scheduleViewTemplete(
+          schedule,
+          eventType,
+          diff,
+          false
+        );
+      }
+    }
+  }
+};
+
 const createScheduleView = schedule => {
   let start = new Date(schedule.startAt);
   let end = new Date(schedule.endAt);
@@ -161,22 +196,16 @@ const createScheduleView = schedule => {
   eventType = schedule.repeated ? "event-repeated" : eventType;
 
   // create monthly schedule
-  let days = $(".day");
-  for (let day of days) {
-    if (!moment(new Date(day.getAttribute("data-date"))).diff(start, "day")) {
-      day.innerHTML += scheduleViewTemplete(schedule, eventType, diff, false);
-      break;
-    }
-  }
+  appendMonthlySchedule(schedule, eventType);
 
   //create daily schedule
   let currentDate = globalCurrentDate.date;
   if (
-    !moment(currentDate).diff(start, "day") ||
-    !moment(currentDate).diff(end, "day")
+    moment(currentDate).diff(start, "day") >= 0 &&
+    moment(currentDate).diff(end, "day") <= 0
   ) {
     $(".daily-calendar").append(
-      scheduleViewTemplete(schedule, eventType, diff, true)
+      scheduleViewTemplete(schedule, eventType, 1, true)
     );
   }
 };
