@@ -30,7 +30,7 @@ router.get("/:year/:month", function(req, res, next) {
 router.post("/write", function(req, res, next) {
   models.Schedule.create({
     title: req.body.title,
-    discription: req.body.discription,
+    description: req.body.description,
     createdAt: new Date(),
     startAt: req.body.startAt,
     endAt: req.body.endAt,

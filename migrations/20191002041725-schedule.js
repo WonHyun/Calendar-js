@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true
       },
       title: Sequelize.STRING,
-      discription: Sequelize.TEXT,
+      description: Sequelize.TEXT,
       createdAt: Sequelize.DATE,
       startAt: Sequelize.DATE,
       endAt: Sequelize.DATE,
